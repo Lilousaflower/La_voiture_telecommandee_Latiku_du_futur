@@ -1,5 +1,6 @@
 # Robot Télécommandé - *Lakitu du Futur* 
 Documentation pour vous permettre de construire un robot télécommandé **Lakitu du Futur**.
+<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/lakitu_final_1.png?raw=true">
 
 ## Matériel Nécessaire 
 - Maya 2024
@@ -51,7 +52,7 @@ Avant | Après
 
 Visage | Carapace
 :-------------------------:|:-------------------------:
-<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/nuage_visage.png?raw=true" width="445">  |  <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/carapace.png?raw=true" width="470">
+<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/nuage_visage.png?raw=true" width="500">  |  <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/carapace.png?raw=true" width="400">
 
 - Enfin, nous allons regouper tous nos élements en un seul mesh gâce à des boolean :
     - Un premier boolean sur le nuage, en mode *"Union"*, dans lequel on rattache les yeux et la bouche.
@@ -64,7 +65,7 @@ Visage | Carapace
 
  Tête | Corps
 :-------------------------:|:-------------------------:
-<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/t%C3%AAte_retopo.png?raw=true" width="445">  |  <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/corps_retopo.png?raw=true" width="470">
+<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/t%C3%AAte_retopo.png?raw=true" width="485">  |  <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/corps_retopo.png?raw=true" width="470">
 
 Enfin, nous avons modéliser sur Blender des roues de diamètre 6cm et largeur 1.5cm.  
 Lorsque vous avez terminé vos modélisations et retopo, il vous suffit d'exporter vos fichiers en stl, et ils sont désormais prêts à être importés dans votre logiciel d'imprimante 3D ! Nous imprimerons uniquement avec du filament blanc.
@@ -74,10 +75,17 @@ Il est temps de passer au montage du moteur qui va nous permettre de faire tourn
 Nous vous laissons suivre ce schéma pour la construction et la soudure : 
 
 <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240411_121628217.MP.jpg?raw=true" width="445"> 
-<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240410_120313893.jpg?raw=true" width="445"> <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240409_141633069.jpg?raw=truee" width="445"> <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240410_150117329.jpg?raw=true" width="445"> <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240411_085921803.jpg?raw=true" width="445">
+
+ Tête | Corps
+:-------------------------:|:-------------------------:
+<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240410_120313893.jpg?raw=true" width="445"> | <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240410_150117329.jpg?raw=true" width="445"> 
+<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240409_141633069.jpg?raw=truee" width="445"> | <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240411_085921803.jpg?raw=true" width="445">
+
 
 ## 3. Codage
-Code pour la voiture : 
+Pour 
+
+Code pour la voiture : Il s'agit du code qui reçoit les infos, qui permet d'allumer et donner de l'energie au moteur, et aussi d'allumer les LED : 
 
 ```
 #include <ESP8266WiFi.h>
@@ -169,7 +177,7 @@ void loop() {
 }
 ```
 
-Code pour le joytick : 
+Code pour le joytick : Il s'agit du code qui permet de rendre les infos de position de joystick et les transmettre par wifi à la carte de la voiture pour activer ^les mouvement avant/arrière le moteur, ralentir, accélerer, et tourner à droite/gauche
 
 ```
 #include <ESP8266WiFi.h>
@@ -338,3 +346,5 @@ Pour la personnalisation de Lakitu, nous l'avons d'abord peint avec ses couleurs
 Enfin, il est temps de coller le personnage à sa base, en faisant attention de bien placer les LED à l'intérieur du nuage. Pour l'esthétique, nous avons décidé de regrouvrir toute la base de boules de cotton, donnant l'impression que notre Lakitu se balade bien dans les nuages !
 
 Notre super voiture est désormais terminée, est prête pour des courses de folies ! 
+<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/lakitu_final_2.png?raw=true">
+
