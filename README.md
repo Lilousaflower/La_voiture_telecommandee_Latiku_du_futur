@@ -16,7 +16,9 @@ Documentation pour vous permettre de construire un robot télécommandé **Lakit
       - Modification du modèle
       - Export des fichiers
       - Impression 3D
-2. Assemblage et Personnalisation de la coque
+2. Montage du moteur et des roues
+3. Codage
+3. Assemblage et Personnalisation de la coque
       - Création des accessoires
       - Peinture
       - Assemblage des élements 
@@ -33,7 +35,7 @@ Reconstitution du modèle | Eléments intéressants
 :-------------------------:|:-------------------------:
 <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/lakitu_og.png?raw=true" width="500">  |  <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/lakitu_v2.png?raw=true" width="509.7">
 
-- Puis, nous allons cleaner et reboucher les trous présents dans les mesh. Exemple avec le nuage, on retire les polygones en trop dans les trous, et on rebouche ceux-ci grâce à un *"Fill"*, puis lissez grossièrement les reliefs en mode sculpt grâce au bruch *"Smooth"*. Il faut faire ça aussi avec le corps (où on va retirer la partie basse qui servait de support, et reboucher les bras), et la tête (on rebouche les yeux et le trous au dessus de son crâne) : 
+- Puis, nous allons cleaner et reboucher les trous présents dans les mesh. Exemple avec le nuage, on retire les polygones en trop dans les trous, et on rebouche ceux-ci grâce à un *"Fill"*, puis on lisse grossièrement les reliefs en mode sculpt grâce au bruch *"Smooth"*. Il faut faire ça aussi avec le corps (où on va retirer la partie basse qui servait de support, et reboucher les bras), et la tête (on rebouche les yeux et le trous au dessus de son crâne). Petite spécificité au nuage : nous voulons laisser l'intérieur creux pour l'impression 3D, afin d'y glisser les LED par la suite
   
 Avant | Après
 :-------------------------:|:-------------------------:
@@ -51,3 +53,35 @@ Visage | Carapace
 :-------------------------:|:-------------------------:
 <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/nuage_visage.png?raw=true" width="445">  |  <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/carapace.png?raw=true" width="470">
 
+- Enfin, nous allons regouper tous nos élements en un seul mesh gâce à des boolean :
+    - Un premier boolean sur le nuage, en mode *"Union"*, dans lequel on rattache les yeux et la bouche.
+    - Un deuxième boolean sur le corps, en mode *"Union"*, dans lequel on rattache les bras.
+    - Un dernier boolean sur le corps, en mode *"Union"*, dans lequel on rattache la carapace.
+      
+ Ainsi, une fois tous les boolean Apply, nous nous retrouvons avec 2 meshs distincts : 1 pour la tête et un pour tout le reste des élements. Nous allons exporter ces 2 meshs en 2 fbx pour les passer sur Maya.
+
+ Une fois Maya 2024 ouvert, nous allons commencer par importer la tête. Une fois le mesh importer, il suffit de le sélectionner, et de liquer dans le menu Mesh > Retopologize > carré d'options. Le seul paramètre que nous allons modifier est le *"Target Face Count"* que nous allons mettre à 25000. Celà correspond au nombre de polygones. Plus il y a de polygones, plus on garde les détails. Enfin, il faut cliquer sur "Retopoloogize", et votre mesh à désormais un maillage uniforme ! Nous allons procéder exactement de la même manière pour le corps, en y mettant 50000 polygones. 
+
+ Tête | Corps
+:-------------------------:|:-------------------------:
+<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/t%C3%AAte_retopo.png?raw=true" width="445">  |  <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/corps_retopo.png?raw=true" width="470">
+
+Enfin, nous avons modéliser sur Blender des roues de diamètre 6cm et largeur 1.5cm.  
+Lorsque vous avez terminé vos modélisations et retopo, il vous suffit d'exporter vos fichiers en stl, et ils sont désormais prêts à être importés dans votre logiciel d'imprimante 3D ! Nous imprimerons uniquement avec du filament blanc.
+
+## 2. Montage du moteur et des roues
+Il est temps de passer au montage du moteur qui va nous permettre de faire tourner les roues, et de pouvoir les contrôler grâce à un joystick (les cartes ESP8266 nous permettent de communiquer ensemble et donc la voiture devient pilotable sans fils). Nous avons aussi relié une bande LED.   
+Nous vous laissons suivre ce schéma pour la construction et la soudure : 
+
+<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240411_121628217.MP.jpg?raw=true" width="445"> 
+<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240410_120313893.jpg?raw=true" width="445"> <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240409_141633069.jpg?raw=truee" width="445"> <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240410_150117329.jpg?raw=true" width="445"> <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240411_085921803.jpg?raw=true" width="445">
+
+## 3. Codage 
+## 4. Assemblage et personnalisation de la coque
+Une fois le montage et le codage terminés, nous pouvons passer à la dernière étape qu'est le montage de tous les élements ensemble et la personnalisation du robot. 
+
+Dans un premier temps, nous avons biens fixé tous nos élements de moteur à une planche de bois de 15cm sur 15cm, que nous avons refermé comme une boite. Nous avons seulement laissé dépassé l'interrupteur pour le rendre facilement accessible, ainsi que la bande LED. 
+
+Pour la personnalisation de Lakitu, nous l'avons d'abord peint avec ses couleurs originales, et nous avons collé la tête au corps. Puis, comme nous volons créer un Lakitu du futur, nous avons construit pleins de petit élements avec du papier aluminium et des fils de fer : des lunettes futuristes, une carapace de cyborg, des câbles, des antennes à la place de ses cheveux ... A vous de laisser libre court à votre imagination ! Il vous suffira de coller tous ces élements grâce à de la colle chaude. 
+
+Enfin, il est temps
