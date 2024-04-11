@@ -27,9 +27,21 @@ D'abord, il faut récupérer un modèle 3D sur internet qui convient au niveau d
 
 Puis, il faut réparer et réadappter un peu le modèle selon nos besoins. Pour ça nous allons utiliser _**Maya**_ qui va nous permettre à retopo le modèle pour que les modifications soient plus simples, et _**Blender**_ pour les modifications des élements, Blender étant un logiciel plus accessible et facile à prendre en main. Il est possible d'utiliser uniquement Maya.  
 
-- D'abord, nous importons et reconstituons le modèle téléchargé depuis Internet, et nous gardons uniquement les élements qui nous intéressent :
+- D'abord, nous importons et reconstituons le modèle téléchargé depuis Internet, et nous gardons uniquement les élements qui nous intéressent, à savoir le nuage, le corps, la tête, les bras et la carapace :
   
 Reconstitution du modèle | Eléments intéressants
 :-------------------------:|:-------------------------:
-<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/lakitu_og.png?raw=true" width="500">  |  <img src="https://private-user-images.githubusercontent.com/166694475/321576173-6b272fca-4ad5-47de-a6cc-73fdc39d69ed.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTI4Mjc1MjAsIm5iZiI6MTcxMjgyNzIyMCwicGF0aCI6Ii8xNjY2OTQ0NzUvMzIxNTc2MTczLTZiMjcyZmNhLTRhZDUtNDdkZS1hNmNjLTczZmRjMzlkNjllZC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNDExJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDQxMVQwOTIwMjBaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1hNDY1ODNjMTBkMTYwZjA4NGRmNzViYjgxYjZhMjNlNTUwOWZlMjM4M2FmYmZjYmY2YmYzZWEyMzI1N2E5MGI3JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.x54Rd_2KPiJjqaKjbuc_xGVSw6Xp9P13dsj3w4wWnqA" width="507.6">
+<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/lakitu_og.png?raw=true" width="500">  |  <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/lakitu_v2.png?raw=true" width="509.7">
+
+- Puis, nous allons cleaner et reboucher les trous présents dans les mesh. Exemple avec le nuage, on retire les polygones en trop dans les trous, et on rebouche ceux-ci grâce à un *"Fill"*, puis lissez grossièrement les reliefs en mode sculpt grâce au bruch *"Smooth"*. Il faut faire ça aussi avec le corps (où on va retirer la partie basse qui servait de support, et reboucher les bras), et la tête (on rebouche les yeux et le trous au dessus de son crâne) : 
+  
+Avant | Après
+:-------------------------:|:-------------------------:
+<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/nuage_old.png?raw=true" width="450">  |  <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/nuage_new.png?raw=true" width="540">
+
+- Pour le bras droit, nous allons tout simplement suprimmer la main, et la remplacer par la main gauche du modèle que nous aurons copié, mis en symétrie, et rattaché au reste du bras droit :
+
+Avant | Après
+:-------------------------:|:-------------------------:
+<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/bras_avant%20.png?raw=true" width="445">  |  <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/bras_apres.png?raw=true" width="470">
 
