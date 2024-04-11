@@ -5,11 +5,13 @@ Documentation pour vous permettre de construire un robot télécommandé **Lakit
 ## Matériel Nécessaire 
 - Maya 2024
 - Imprimante 3D
-- Aluminimum
+- Papier aluminimum
 - Peinture Jaune, Marron et Argenté
 - Fil de Fer
 - Pistolet à Colle
 - Bois fin ou carton épais
+- Boules de coton
+- Joystick
   
 ## Sommaire de Création
 1. Création 3D de la coque
@@ -19,6 +21,8 @@ Documentation pour vous permettre de construire un robot télécommandé **Lakit
       - Impression 3D
 2. Montage du moteur et des roues
 3. Codage
+      - La voiture
+      - Le joystick
 3. Assemblage et Personnalisation de la coque
       - Création des accessoires
       - Peinture
@@ -71,12 +75,13 @@ Enfin, nous avons modéliser sur Blender des roues de diamètre 6cm et largeur 1
 Lorsque vous avez terminé vos modélisations et retopo, il vous suffit d'exporter vos fichiers en stl, et ils sont désormais prêts à être importés dans votre logiciel d'imprimante 3D ! Nous imprimerons uniquement avec du filament blanc.
 
 ## 2. Montage du moteur et des roues
-Il est temps de passer au montage du moteur qui va nous permettre de faire tourner les roues, et de pouvoir les contrôler grâce à un joystick (les cartes ESP8266 nous permettent de communiquer ensemble et donc la voiture devient pilotable sans fils). Nous avons aussi relié une bande LED.   
+Il est temps de passer au montage du moteur qui va nous permettre de faire tourner les roues, et de pouvoir les contrôler grâce à un joystick (les cartes ESP8266 nous permettent de communiquer ensemble et donc la voiture devient pilotable sans fils). Nous avons aussi relié une bande LED.  
+C'est aussi le moment de ratacher nos roues aux moteurs, et d'y entourer les elastiques pour pouvoir avoir une meilleur adhérance au sol. 
 Nous vous laissons suivre ce schéma pour la construction et la soudure : 
 
 <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240411_121628217.MP.jpg?raw=true" width="445"> 
 
- Tête | Corps
+ Montage | Montage
 :-------------------------:|:-------------------------:
 <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240410_120313893.jpg?raw=true" width="445"> | <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240410_150117329.jpg?raw=true" width="445"> 
 <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240409_141633069.jpg?raw=truee" width="445"> | <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240411_085921803.jpg?raw=true" width="445">
