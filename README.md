@@ -42,7 +42,7 @@ Pour le moteur :
 La première étape consiste à imaginer et créer la coque de notre robot. 
 D'abord, il faut récupérer un modèle 3D sur internet qui convient au niveau de la forme globale au résultat attendu pour notre robot : [Lien vers le modèle](https://cults3d.com/fr/mod%C3%A8le-3d/jeu/lakitu-from-mario-games-multi-color).
 
-Puis, il faut réparer et réadappter un peu le modèle selon nos besoins. Pour ça nous allons utiliser _**Maya**_ qui va nous permettre à retopo le modèle pour que les modifications soient plus simples, et _**Blender**_ pour les modifications des élements, Blender étant un logiciel plus accessible et facile à prendre en main. Il est possible d'utiliser uniquement Maya.  
+Puis, il faut réparer et réadappter un peu le modèle selon nos besoins. Pour ça nous allons utiliser _**Maya**_ qui va nous permettre de retopo le modèle, et _**Blender**_ pour les modifications des élements, Blender étant un logiciel plus accessible et facile à prendre en main. Il est possible d'utiliser uniquement Maya.  
 
 - D'abord, nous importons et reconstituons le modèle téléchargé depuis Internet, et nous gardons uniquement les élements qui nous intéressent, à savoir le nuage, le corps, la tête, les bras et la carapace. Il faut bien faire attention à ce que le modèle soit à la bonne échelle (à savoir 10cm de large) :
   
@@ -73,9 +73,9 @@ Visage | Carapace
     - Un deuxième boolean sur le corps, en mode *"Union"*, dans lequel on rattache les bras.
     - Un dernier boolean sur le corps, en mode *"Union"*, dans lequel on rattache la carapace.
       
- Ainsi, une fois tous les boolean Apply, nous nous retrouvons avec 2 meshs distincts : 1 pour la tête et un pour tout le reste des élements. Nous allons exporter ces 2 meshs en 2 fbx pour les passer sur Maya.
+ Ainsi, une fois tous les boolean Apply, nous nous retrouvons avec 2 meshs distincts : 1 pour la tête et 1 pour tout le reste des élements. Nous allons exporter ces 2 meshs en 2 fbx pour les passer sur Maya.
 
- Une fois Maya 2024 ouvert, nous allons commencer par importer la tête. Une fois le mesh importer, il suffit de le sélectionner, et de liquer dans le menu Mesh > Retopologize > carré d'options. Le seul paramètre que nous allons modifier est le *"Target Face Count"* que nous allons mettre à 25000. Celà correspond au nombre de polygones. Plus il y a de polygones, plus on garde les détails. Enfin, il faut cliquer sur "Retopoloogize", et votre mesh à désormais un maillage uniforme ! Nous allons procéder exactement de la même manière pour le corps, en y mettant 50000 polygones. 
+ Une fois Maya 2024 ouvert, nous allons commencer par importer la tête. Une fois le mesh importer, il suffit de le sélectionner, et de cliquer dans le menu Mesh > Retopologize > carré d'options. Le seul paramètre que nous allons modifier est le *"Target Face Count"* que nous allons mettre à 25000. Celà correspond au nombre de polygones. Plus il y a de polygones, plus on garde les détails. Enfin, il faut cliquer sur "Retopologize", et votre mesh à désormais un maillage uniforme ! Nous allons procéder exactement de la même manière pour le corps, en y mettant 50000 polygones. 
 
  Tête | Corps
 :-------------------------:|:-------------------------:
@@ -98,7 +98,7 @@ Nous vous laissons suivre ce schéma pour la construction et la soudure :
 
 
 ## 3. Codage
-Pour 
+Pour pouvoir contrôler notre voiture à distance, nous aurons besoin de coder sur Arduino.
 
 Code pour la voiture : Il s'agit du code qui reçoit les infos, qui permet d'allumer et donner de l'energie au moteur, et aussi d'allumer les LED : 
 
@@ -358,7 +358,7 @@ Dans un premier temps, nous avons biens fixé tous nos élements de moteur à un
 
 Pour la personnalisation de Lakitu, nous l'avons d'abord peint avec ses couleurs originales, et nous avons collé la tête au corps. Puis, comme nous volons créer un Lakitu du futur, nous avons construit pleins de petit élements avec du papier aluminium et des fils de fer : des lunettes futuristes, une carapace de cyborg, des câbles, des antennes à la place de ses cheveux ... A vous de laisser libre court à votre imagination ! Il vous suffira de coller tous ces élements grâce avec de la colle chaude. 
 
-Enfin, il est temps de coller le personnage à sa base, en faisant attention de bien placer les LED à l'intérieur du nuage. Pour l'esthétique, nous avons décidé de regrouvrir toute la base de boules de cotton, donnant l'impression que notre Lakitu se balade bien dans les nuages !
+Enfin, il est temps de coller le personnage à sa base, en faisant attention de bien placer les LED à l'intérieur du nuage. Pour l'esthétique, nous avons décidé de recouvrir toute la base de boules de cotton, donnant l'impression que notre Lakitu se balade bien dans les nuages !
 
 Notre super voiture est désormais terminée, est prête pour des courses de folies ! 
 <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/lakitu_final_2.png?raw=true">
