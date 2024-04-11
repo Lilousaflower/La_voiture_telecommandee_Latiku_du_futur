@@ -11,7 +11,17 @@ Documentation pour vous permettre de construire un robot télécommandé **Lakit
 - Pistolet à Colle
 - Bois fin ou carton épais
 - Boules de coton
+
+Pour le moteur :
+- NodeMCU Esp8266
+- Cd 4066
+- Moteur driver
+- 2 moteurs
+- 1 pile 9V
+- Interrupteur
+- Limiteur de courant
 - Joystick
+- Fils électriques
   
 ## Sommaire de Création
 1. Création 3D de la coque
