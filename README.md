@@ -27,7 +27,7 @@ D'abord, il faut récupérer un modèle 3D sur internet qui convient au niveau d
 
 Puis, il faut réparer et réadappter un peu le modèle selon nos besoins. Pour ça nous allons utiliser _**Maya**_ qui va nous permettre à retopo le modèle pour que les modifications soient plus simples, et _**Blender**_ pour les modifications des élements, Blender étant un logiciel plus accessible et facile à prendre en main. Il est possible d'utiliser uniquement Maya.  
 
-- D'abord, nous importons et reconstituons le modèle téléchargé depuis Internet, et nous gardons uniquement les élements qui nous intéressent, à savoir le nuage, le corps, la tête, les bras et la carapace :
+- D'abord, nous importons et reconstituons le modèle téléchargé depuis Internet, et nous gardons uniquement les élements qui nous intéressent, à savoir le nuage, le corps, la tête, les bras et la carapace. Il faut bien faire attention à ce que le modèle soit à la bonne échelle (à savoir 10cm de large) :
   
 Reconstitution du modèle | Eléments intéressants
 :-------------------------:|:-------------------------:
@@ -44,4 +44,10 @@ Avant | Après
 Avant | Après
 :-------------------------:|:-------------------------:
 <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/bras_avant%20.png?raw=true" width="445">  |  <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/bras_apres.png?raw=true" width="470">
+
+- Puis, nous allons recréer des petits élements, à savoir les yeux et la bouche du nuage (avec des demi-sphères qu'on met à la bonne taille), ainsi que la carapace (qui est aussi une demi sphère) : 
+
+Visage | Carapace
+:-------------------------:|:-------------------------:
+<img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/nuage_visage.png?raw=true" width="445">  |  <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/carapace.png?raw=true" width="470">
 
