@@ -76,12 +76,265 @@ Nous vous laissons suivre ce schéma pour la construction et la soudure :
 <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240411_121628217.MP.jpg?raw=true" width="445"> 
 <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240410_120313893.jpg?raw=true" width="445"> <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240409_141633069.jpg?raw=truee" width="445"> <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240410_150117329.jpg?raw=true" width="445"> <img src="https://github.com/Lilousaflower/La_voiture_telecommandee_Latiku_du_futur/blob/IMAGES/PXL_20240411_085921803.jpg?raw=true" width="445">
 
-## 3. Codage 
+## 3. Codage
+Code pour la voiture : 
+
+```
+#include <ESP8266WiFi.h>
+#include <espnow.h>
+
+// REPLACE WITH RECEIVER MAC Address
+uint8_t broadcastAddress[] = {0x08,0xF9, 0xE0, 0x73, 0xDC, 0x83};
+
+// Structure example to send data
+// Must match the receiver structure
+typedef struct struct_message {
+  int x;
+  int y;
+  bool b;
+} struct_message;
+
+
+// Create a struct_message called myData
+struct_message myData;
+
+unsigned long lastTime = 0;
+unsigned long timerDelay = 300;
+
+void OnDataSent(uint8_t *mac_addr, uint8_t sendStatus) {
+  Serial.print("Last Packet Send Status: ");
+  if (sendStatus == 0){
+    Serial.println("Delivery success");
+  }
+  else{
+    Serial.println("Delivery fail");
+  }
+}
+
+void setup() {
+// Init Serial Monitor
+  Serial.begin(74880);
+ 
+  // Set device as a Wi-Fi Station
+  WiFi.mode(WIFI_STA);
+
+  // Init ESP-NOW
+  if (esp_now_init() != 0) {
+    Serial.println("Error initializing ESP-NOW");
+    return;
+  }
+
+  // Once ESPNow is successfully Init, we will register for Send CB to
+  // get the status of Trasnmitted packet
+  esp_now_set_self_role(ESP_NOW_ROLE_CONTROLLER);
+  esp_now_register_send_cb(OnDataSent);
+  
+  // Register peer
+  esp_now_add_peer(broadcastAddress, ESP_NOW_ROLE_SLAVE, 1, NULL, 0);
+
+  // put your setup code here, to run once:
+  pinMode(D1, OUTPUT);
+  pinMode(D3, OUTPUT);
+  pinMode(D2, INPUT_PULLUP);
+
+}
+
+void loop() {
+
+    digitalWrite(D1, HIGH);
+    digitalWrite(D3, LOW);
+ 
+    int av_ar = analogRead(A0);
+
+    digitalWrite(D3, HIGH);
+    digitalWrite(D1, LOW);
+
+    int g_d = analogRead(A0);
+
+
+    // Set values to send
+    myData.x = av_ar;
+    myData.y = g_d;
+    myData.b = true;
+
+    // Send message via ESP-NOW
+    esp_now_send(broadcastAddress, (uint8_t *) &myData, sizeof(myData));
+
+    Serial.println(av_ar);
+    Serial.println(g_d);
+    delay(30);
+
+
+
+}
+```
+
+Code pour le joytick : 
+
+```
+#include <ESP8266WiFi.h>
+#include <espnow.h>
+#include <NeoPixelBus.h>
+
+#define EXPIRE_TIME 10000
+
+
+const uint16_t PixelCount = 50; // this example assumes 4 pixels, making it smaller will cause a failure
+const uint8_t PixelPin = 3; 
+
+#define colorSaturation 128
+
+NeoPixelBus<NeoGrbFeature, NeoWs2812xMethod> strip(PixelCount, PixelPin);
+
+RgbColor red(colorSaturation, 0, 0);
+RgbColor green(0, colorSaturation, 0);
+RgbColor blue(0, 0, colorSaturation);
+RgbColor white(colorSaturation);
+RgbColor black(0);
+RgbColor pink(229, 0, 109);
+
+HslColor hslRed(red);
+HslColor hslGreen(green);
+HslColor hslBlue(blue);
+HslColor hslWhite(white);
+HslColor hslBlack(black);
+HslColor hslPink(pink);
+
+// Structure example to receive data
+// Must match the sender structure
+typedef struct struct_message {
+    int x;
+    int y;
+    bool b;
+} struct_message;
+
+// Create a struct_message called myData
+struct_message myData;
+
+typedef struct x_y {
+  int x = 0;
+  int y = 0;
+  bool init = false;
+} x_y;
+
+x_y offsets;
+
+int ts = 0;
+
+// Callback function that will be executed when data is received
+void OnDataRecv(uint8_t * mac, uint8_t *incomingData, uint8_t len) {
+  memcpy(&myData, incomingData, sizeof(myData));
+
+ if(!offsets.init){
+  offsets.x = myData.x;
+  offsets.y = myData.y;
+  offsets.init = true;
+ }
+
+  myData.x = (myData.x - offsets.x) / 2;
+  myData.y = (myData.y - offsets.y) / 2;
+
+  // Serial.print("Bytes received: ");
+  // Serial.println(len);
+  // Serial.print("X: ");
+  // Serial.println(myData.x);
+  // Serial.print("Y: ");
+  // Serial.println(myData.y);
+  // Serial.print("b: ");
+  // Serial.println(myData.b);
+  // Serial.println();
+
+  if (myData.x > 0){
+    analogWrite(D8, myData.x + myData.y);
+    analogWrite(D7, 0);
+    analogWrite(D6, myData.x - myData.y);
+    analogWrite(D5, 0);
+  }
+  else {
+    analogWrite(D8, 0);
+    analogWrite(D7, -1*myData.x + myData.y);
+    analogWrite(D6, 0);
+    analogWrite(D5, -1*myData.x - myData.y);
+  }
+
+  ts = millis();
+}
+
+void setup() {
+  Serial.begin(74880);
+  pinMode(D8, OUTPUT);
+  pinMode(D7, OUTPUT);
+  pinMode(D6, OUTPUT);
+  pinMode(D5, OUTPUT);
+  pinMode(D2, OUTPUT);
+
+  analogWrite(D8, 0);
+  analogWrite(D7, 0);
+  analogWrite(D6, 0);
+  analogWrite(D5, 0);
+
+  
+  // Set device as a Wi-Fi Station
+  WiFi.mode(WIFI_STA);
+
+  // Init ESP-NOW
+  if (esp_now_init() != 0) {
+    Serial.println("Error initializing ESP-NOW");
+    return;
+  }
+  
+  // Once ESPNow is successfully Init, we will register for recv CB to
+  // get recv packer info
+  esp_now_set_self_role(ESP_NOW_ROLE_SLAVE);
+  esp_now_register_recv_cb(OnDataRecv);
+
+  while (!Serial); // wait for serial attach
+
+  Serial.println();
+  Serial.println("Initializing...");
+  Serial.flush();
+
+  // this resets all the neopixels to an off state
+   strip.Begin();
+  strip.Show();
+
+
+  Serial.println();
+  Serial.println("Running...");
+}
+
+void loop() {
+
+  delay(5000);
+
+  Serial.println("Colors R, G, B, W...");
+
+  for(int i = 0; i < PixelCount; ++i){
+  strip.SetPixelColor(i, pink);
+  }
+  strip.Show();
+
+  delay(20);
+
+  if (millis() - ts > EXPIRE_TIME) {
+      analogWrite(D8, 0);
+      analogWrite(D7, 0);
+      analogWrite(D6, 0);
+      analogWrite(D5, 0);
+  }
+
+  delay(500);
+
+}
+```
+
 ## 4. Assemblage et personnalisation de la coque
 Une fois le montage et le codage terminés, nous pouvons passer à la dernière étape qu'est le montage de tous les élements ensemble et la personnalisation du robot. 
 
 Dans un premier temps, nous avons biens fixé tous nos élements de moteur à une planche de bois de 15cm sur 15cm, que nous avons refermé comme une boite. Nous avons seulement laissé dépassé l'interrupteur pour le rendre facilement accessible, ainsi que la bande LED. 
 
-Pour la personnalisation de Lakitu, nous l'avons d'abord peint avec ses couleurs originales, et nous avons collé la tête au corps. Puis, comme nous volons créer un Lakitu du futur, nous avons construit pleins de petit élements avec du papier aluminium et des fils de fer : des lunettes futuristes, une carapace de cyborg, des câbles, des antennes à la place de ses cheveux ... A vous de laisser libre court à votre imagination ! Il vous suffira de coller tous ces élements grâce à de la colle chaude. 
+Pour la personnalisation de Lakitu, nous l'avons d'abord peint avec ses couleurs originales, et nous avons collé la tête au corps. Puis, comme nous volons créer un Lakitu du futur, nous avons construit pleins de petit élements avec du papier aluminium et des fils de fer : des lunettes futuristes, une carapace de cyborg, des câbles, des antennes à la place de ses cheveux ... A vous de laisser libre court à votre imagination ! Il vous suffira de coller tous ces élements grâce avec de la colle chaude. 
 
-Enfin, il est temps
+Enfin, il est temps de coller le personnage à sa base, en faisant attention de bien placer les LED à l'intérieur du nuage. Pour l'esthétique, nous avons décidé de regrouvrir toute la base de boules de cotton, donnant l'impression que notre Lakitu se balade bien dans les nuages !
+
+Notre super voiture est désormais terminée, est prête pour des courses de folies ! 
