@@ -15,7 +15,7 @@ Documentation pour vous permettre de construire un robot télécommandé **Lakit
 Pour le moteur :
 - NodeMCU Esp8266
 - Cd 4066
-- Moteur driver
+- Moteur driver L298N
 - 2 moteurs
 - 1 pile 9V
 - Interrupteur
